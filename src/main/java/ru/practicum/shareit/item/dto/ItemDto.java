@@ -8,8 +8,12 @@ import ru.practicum.shareit.request.ItemRequest;
 @AllArgsConstructor
 public class ItemDto {
     private int id;
+
     private String name;
+
     private String description;
-    private boolean available;
+
+    private Boolean available;
+
     private ItemRequest request;
 }

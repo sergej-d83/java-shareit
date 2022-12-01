@@ -9,8 +9,16 @@ public class ItemMapper {
                 item.getId(),
                 item.getName(),
                 item.getDescription(),
-                item.isAvailable(),
+                item.getAvailable(),
                 item.getRequest() != null ? item.getRequest() : null
+        );
+    }
+
+    public static Item toItem(ItemDto itemDto) {
+        return new Item(
+                itemDto.getName(),
+                itemDto.getDescription(),
+                itemDto.getAvailable()
         );
     }
 }
