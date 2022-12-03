@@ -22,8 +22,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Collection<User> getAllUsers() {
-        return users.values();
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users.values());
     }
 
     @Override

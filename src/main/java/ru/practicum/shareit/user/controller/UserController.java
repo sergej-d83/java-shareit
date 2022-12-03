@@ -6,7 +6,7 @@ import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.service.UserService;
 
 import javax.validation.Valid;
-import java.util.Collection;
+import java.util.List;
 
 @Data
 @RestController
@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public Collection<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    public UserDto updateUser(@Valid @RequestBody UserDto userDto, @PathVariable int userId) {
+    public UserDto updateUser(@RequestBody UserDto userDto, @PathVariable int userId) {
         return userService.updateUser(userDto, userId);
     }
 

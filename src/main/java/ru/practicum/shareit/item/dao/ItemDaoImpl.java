@@ -29,19 +29,19 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public Collection<Item> getItems() {
-        return items.values();
+    public List<Item> getItems() {
+        return new ArrayList<>(items.values());
     }
 
     @Override
-    public Collection<Item> getItemsByUserId(int userId) {
+    public List<Item> getItemsByUserId(int userId) {
         return items.values().stream()
                 .filter(item -> item.getOwner() == userId)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<Item> searchItems(String text) {
+    public List<Item> searchItems(String text) {
         List<Item> itemList = new ArrayList<>();
 
         if (!text.isBlank()) {

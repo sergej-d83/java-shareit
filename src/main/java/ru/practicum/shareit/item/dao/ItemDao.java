@@ -2,7 +2,7 @@ package ru.practicum.shareit.item.dao;
 
 import ru.practicum.shareit.item.model.Item;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface ItemDao {
 
@@ -12,9 +12,9 @@ public interface ItemDao {
 
     Item getItem(int itemId);
 
-    Collection<Item> getItems();
+    List<Item> getItems();
 
-    Collection<Item> getItemsByUserId(int userId);
+    List<Item> getItemsByUserId(int userId);
 
-    Collection<Item> searchItems(String text);
+    List<Item> searchItems(String text);
 }

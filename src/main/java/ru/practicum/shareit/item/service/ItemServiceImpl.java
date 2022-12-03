@@ -12,7 +12,7 @@ import ru.practicum.shareit.item.dto.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.dao.UserDao;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,11 +33,11 @@ public class ItemServiceImpl implements ItemService {
         }
 
         if (itemDto.getAvailable() == null) {
-            throw new InvalidDataException("Неполноценные данные." + itemDto);
+            throw new InvalidDataException("Статус доступности предмета к аренде не указан.");
         } else if (itemDto.getName().isBlank()) {
-            throw new InvalidDataException("Неполноценные данные." + itemDto);
+            throw new InvalidDataException("Название предмета не указанно.");
         } else if (itemDto.getDescription() == null) {
-            throw new InvalidDataException("Неполноценные данные." + itemDto);
+            throw new InvalidDataException("Описание предмета не указанно.");
         }
 
         Item item = ItemMapper.toItem(itemDto);
@@ -85,7 +85,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Collection<ItemDto> getItemsByUserId(int userId) {
+    public List<ItemDto> getItemsByUserId(int userId) {
         if (!isUserPresent(userId)) {
             throw new UserNotFoundException("Пользователь с номером " + userId + " не найден.");
         }
@@ -93,7 +93,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Collection<ItemDto> searchItems(String text) {
+    public List<ItemDto> searchItems(String text) {
 
         return itemDao.searchItems(text).stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
     }

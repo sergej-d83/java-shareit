@@ -10,7 +10,8 @@ import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.dto.UserMapper;
 import ru.practicum.shareit.user.model.User;
 
-import java.util.Collection;
+import javax.validation.Valid;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userDao.getAllUsers().stream()
                 .map(UserMapper::toUserDto)
                 .collect(Collectors.toList());
@@ -86,7 +87,7 @@ public class UserServiceImpl implements UserService {
         return userDao.getAllUsers().stream().anyMatch(user -> user.getId() == userId);
     }
 
-    private boolean isEmailPresent(UserDto userDto) {
+    private boolean isEmailPresent(@Valid UserDto userDto) {
         return userDao.getAllUsers().stream().anyMatch(user -> user.getEmail().equals(userDto.getEmail()));
     }
 }
