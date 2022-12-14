@@ -8,7 +8,7 @@ import javax.validation.constraints.Email;
 @Data
 @AllArgsConstructor
 public class UserDto {
-    private int id;
+    private Long id;
 
     private String name;
 

@@ -7,7 +7,7 @@ import ru.practicum.shareit.request.ItemRequest;
 @Data
 @AllArgsConstructor
 public class Item {
-    private int id;
+    private Long id;
 
     private String name;
 
