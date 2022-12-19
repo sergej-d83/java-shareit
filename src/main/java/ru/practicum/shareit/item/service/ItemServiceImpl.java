@@ -87,7 +87,7 @@ public class ItemServiceImpl implements ItemService {
             throw new UserNotFoundException("Пользователь под номером " + userId + " не найден.");
         }
 
-        if (itemDto.getIsAvailable() == null) {
+        if (itemDto.getAvailable() == null) {
             throw new InvalidDataException("Статус доступности предмета к аренде не указан.");
         } else if (itemDto.getName().isBlank()) {
             throw new InvalidDataException("Название предмета не указанно.");
@@ -105,8 +105,8 @@ public class ItemServiceImpl implements ItemService {
             item.setName(itemDto.getName());
         } else if (itemDto.getDescription() != null) {
             item.setDescription(itemDto.getDescription());
-        } else if (itemDto.getIsAvailable() != null) {
-            item.setIsAvailable(itemDto.getIsAvailable());
+        } else if (itemDto.getAvailable() != null) {
+            item.setAvailable(itemDto.getAvailable());
         } else if (itemDto.getRequest() != null) {
             item.setRequest(itemDto.getRequest());
         }

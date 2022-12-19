@@ -25,19 +25,19 @@ public class Item {
     private String description;
 
     @Column(name = "is_available")
-    private Boolean isAvailable;
+    private Boolean available;
 
     @Column(name = "owner_id")
     private Long owner;
 
     @OneToOne
-    @JoinColumn(name = "request_id", referencedColumnName = "id")
+    @JoinColumn(name = "request_id")
     private ItemRequest request;
 
-    public Item(Long id, String name, String description, boolean isAvailable) {
+    public Item(Long id, String name, String description, boolean available) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.isAvailable = isAvailable;
+        this.available = available;
     }
 }
