@@ -1,5 +1,6 @@
 package ru.practicum.shareit.booking.repository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.practicum.shareit.booking.model.Booking;
@@ -50,4 +51,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             "where status like ?2 and owner_id = ?1 " +
             "order by b.start_date", nativeQuery = true)
     List<Booking> findAllByItem_OwnerAndState(Long ownerId, String state);
+
+    Optional<Booking> findFirstByItem_IdAndStartIsBefore(Long itemId, LocalDateTime now, Sort sort);
+
+    Optional<Booking> findFirstByItem_IdAndStartIsAfter(Long itemId, LocalDateTime now, Sort sort);
+
 }

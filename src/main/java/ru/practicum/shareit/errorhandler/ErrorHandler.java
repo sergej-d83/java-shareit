@@ -50,4 +50,10 @@ public class ErrorHandler {
     public ErrorResponse handleInvalidDataException(final InvalidDataException e) {
         return new ErrorResponse(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleItemNotAvailableException(final ItemNotAvailableException e) {
+        return new ErrorResponse(e.getMessage());
+    }
 }

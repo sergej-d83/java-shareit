@@ -28,21 +28,21 @@ public class Booking {
     private LocalDateTime end;
 
     @ManyToOne
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "booker_id", referencedColumnName = "id")
+    @JoinColumn(name = "booker_id", nullable = false)
     private User booker;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    public Booking(LocalDateTime start, LocalDateTime end, Item item, User booker) {
+    public Booking(Long id, LocalDateTime start, LocalDateTime end) {
+        this.id = id;
         this.start = start;
         this.end = end;
-        this.item = item;
-        this.booker = booker;
         this.status = Status.WAITING;
     }
 }
