@@ -1,13 +1,15 @@
 package ru.practicum.shareit.item.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import ru.practicum.shareit.request.ItemRequest;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+
 @Data
-@AllArgsConstructor
 public class ItemDto {
-    private int id;
+    private Long id;
 
     private String name;
 
@@ -16,4 +18,38 @@ public class ItemDto {
     private Boolean available;
 
     private ItemRequest request;
+
+    private Booking lastBooking;
+
+    private Booking nextBooking;
+
+    private List<Comment> comments;
+
+    @Data
+    public static class Booking {
+
+        private final Long id;
+
+        private final Long bookerId;
+    }
+
+    @Data
+    public static class Comment {
+
+        private final Long id;
+
+        private final String text;
+
+        private final String authorName;
+
+        private final LocalDateTime created;
+    }
+
+    public ItemDto(Long id, String name, String description, Boolean available) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.available = available;
+        this.comments = Collections.emptyList();
+    }
 }
