@@ -1,15 +1,13 @@
 package ru.practicum.shareit.item.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.Status;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
-import ru.practicum.shareit.exception.InvalidDataException;
-import ru.practicum.shareit.exception.ItemNotFoundException;
-import ru.practicum.shareit.exception.UserNotFoundException;
-import ru.practicum.shareit.exception.UserNotOwnItem;
+import ru.practicum.shareit.exception.*;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.CommentMapper;
 import ru.practicum.shareit.item.dto.ItemDto;
@@ -18,6 +16,7 @@ import ru.practicum.shareit.item.model.Comment;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.CommentRepository;
 import ru.practicum.shareit.item.repository.ItemRepository;
+import ru.practicum.shareit.request.repository.RequestRepository;
 import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -32,6 +31,7 @@ public class ItemServiceImpl implements ItemService {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
     private final BookingRepository bookingRepository;
+    private final RequestRepository requestRepository;
 
     @Override
     public ItemDto addItem(ItemDto itemDto, Long userId) {
@@ -40,6 +40,11 @@ public class ItemServiceImpl implements ItemService {
 
         Item item = ItemMapper.toItem(itemDto);
         item.setOwner(userId);
+
+        if (itemDto.getRequestId() != null) {
+            item.setRequest(requestRepository.findById(itemDto.getRequestId())
+                    .orElseThrow(() -> new RequestNotFoundException("Запрос не найден.")));
+        }
 
         return ItemMapper.toItemDto(itemRepository.save(item));
     }
@@ -97,14 +102,19 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getItemsByUserId(Long userId) {
+    public List<ItemDto> getItemsByUserId(Long userId, int from, int size) {
         if (!isUserPresent(userId)) {
             throw new UserNotFoundException("Пользователь с номером " + userId + " не найден.");
         }
 
-        List<Item> items = itemRepository.findAllByOwner(userId);
+        List<Item> items = itemRepository.findAllByOwner(userId, PageRequest.of(from, size));
         List<Comment> comments = commentRepository.findAllByItem_Owner(userId);
-        List<Booking> bookings = bookingRepository.findAllByItem_OwnerAndState(userId, Status.APPROVED.toString());
+        List<Booking> bookings = bookingRepository.findAllByItem_OwnerAndState(
+                userId,
+                Status.APPROVED.toString(),
+                PageRequest.of(from, size)
+        );
+
         List<ItemDto> itemDtos = new ArrayList<>();
 
         for (Item item : items) {
@@ -140,13 +150,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> searchItems(String text) {
+    public List<ItemDto> searchItems(String text, int from, int size) {
 
         if (text.isEmpty()) {
             return Collections.emptyList();
         }
 
-        List<Item> items = itemRepository.searchItems(text);
+        List<Item> items = itemRepository.searchItems(text, PageRequest.of(from, size));
 
         return items.stream().map(ItemMapper::toItemDto).collect(Collectors.toList());
     }

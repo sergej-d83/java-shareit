@@ -1,7 +1,7 @@
 package ru.practicum.shareit.item.dto;
 
 import lombok.Data;
-import ru.practicum.shareit.request.ItemRequest;
+import ru.practicum.shareit.request.model.ItemRequest;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -25,6 +25,8 @@ public class ItemDto {
 
     private List<Comment> comments;
 
+    private Long requestId;
+
     @Data
     public static class Booking {
 
@@ -45,11 +47,12 @@ public class ItemDto {
         private final LocalDateTime created;
     }
 
-    public ItemDto(Long id, String name, String description, Boolean available) {
+    public ItemDto(Long id, String name, String description, Boolean available, Long requestId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.available = available;
+        this.requestId = requestId;
         this.comments = Collections.emptyList();
     }
 }
