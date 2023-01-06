@@ -24,8 +24,8 @@ class BookingDtoTest {
         BookingDto bookingDto = new BookingDto();
 
         bookingDto.setId(1L);
-        bookingDto.setStart(LocalDateTime.of(2022,12,29,11,10,1));
-        bookingDto.setEnd(LocalDateTime.of(2022,12,29,12,10,1));
+        bookingDto.setStart(LocalDateTime.of(2022, 12, 29, 11, 10, 1));
+        bookingDto.setEnd(LocalDateTime.of(2022, 12, 29, 12, 10, 1));
         bookingDto.setItemId(1L);
         bookingDto.setItem(new BookingDto.Item(1L, "name"));
         bookingDto.setBooker(new BookingDto.User(1L));

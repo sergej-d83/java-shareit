@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Pageable;
-import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 class RequestRepositoryTest {
@@ -37,7 +37,7 @@ class RequestRepositoryTest {
         itemRequest = new ItemRequest();
         itemRequest.setDescription("need tool");
         itemRequest.setRequester(user);
-        itemRequest.setCreated(LocalDateTime.of(2023,1,4,12,0,1));
+        itemRequest.setCreated(LocalDateTime.of(2023, 1, 4, 12, 0, 1));
     }
 
     @Test

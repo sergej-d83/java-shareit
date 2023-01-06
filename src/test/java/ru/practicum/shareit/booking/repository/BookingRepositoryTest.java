@@ -63,6 +63,7 @@ class BookingRepositoryTest {
     void findBookingByBookerOrOwnerTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -77,6 +78,7 @@ class BookingRepositoryTest {
     void findAllByBooker_IdOrderByStartDescTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -92,6 +94,7 @@ class BookingRepositoryTest {
     void findAllByBooker_IdAndStatusCurrentTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -109,6 +112,7 @@ class BookingRepositoryTest {
     void findAllByBooker_IdAndStartIsAfterOrderByStartDescTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -127,6 +131,7 @@ class BookingRepositoryTest {
     void findAllByBooker_IdAndEndIsBeforeOrderByStartDescTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -145,6 +150,7 @@ class BookingRepositoryTest {
     void findAllByBooker_IdAndEndIsBeforeOrderByStartDesc() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -162,6 +168,7 @@ class BookingRepositoryTest {
     void findAllByBooker_IdAndStatusTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -176,6 +183,7 @@ class BookingRepositoryTest {
     void findAllByItem_OwnerOrderByStartDescTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -190,6 +198,7 @@ class BookingRepositoryTest {
     void findAllByItem_OwnerAndStatusCurrentTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -207,6 +216,7 @@ class BookingRepositoryTest {
     void findAllByItem_OwnerAndEndIsBeforeOrderByStartDescTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -224,6 +234,7 @@ class BookingRepositoryTest {
     void findAllByItem_OwnerAndStartIsAfterOrderByStartDescTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -255,6 +266,7 @@ class BookingRepositoryTest {
     void findFirstByItem_IdAndStartIsBeforeTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 
@@ -272,6 +284,7 @@ class BookingRepositoryTest {
     void findFirstByItem_IdAndStartIsAfterTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 

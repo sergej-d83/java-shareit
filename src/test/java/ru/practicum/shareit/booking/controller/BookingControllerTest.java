@@ -19,9 +19,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = BookingController.class)
@@ -45,8 +46,8 @@ class BookingControllerTest {
 
         bookingDto = new BookingDto();
         bookingDto.setId(1L);
-        bookingDto.setStart(LocalDateTime.of(2022, 12, 30, 18, 20, 1));
-        bookingDto.setEnd(LocalDateTime.of(2022, 12, 31, 18, 20, 1));
+        bookingDto.setStart(LocalDateTime.of(2023, 1, 10, 12, 0, 1));
+        bookingDto.setEnd(LocalDateTime.of(2023, 1, 10, 12, 0, 1));
         bookingDto.setStatus(Status.WAITING);
         bookingDto.setItemId(1L);
         bookingDto.setItem(new BookingDto.Item(1L, "name"));

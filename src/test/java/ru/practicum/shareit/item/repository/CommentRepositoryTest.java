@@ -12,7 +12,7 @@ import ru.practicum.shareit.user.model.User;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 class CommentRepositoryTest {
@@ -43,7 +43,7 @@ class CommentRepositoryTest {
         comment.setText("cool");
         comment.setItem(item);
         comment.setAuthor(user);
-        comment.setCreated(LocalDateTime.of(2023,1,4,12,0,1));
+        comment.setCreated(LocalDateTime.of(2023, 1, 4, 12, 0, 1));
     }
 
     @Test
@@ -65,6 +65,7 @@ class CommentRepositoryTest {
     @Test
     void findAllByItem_Owner() {
 
+        item.setOwner(2L);
         em.persist(user);
         em.persist(item);
         em.persist(comment);

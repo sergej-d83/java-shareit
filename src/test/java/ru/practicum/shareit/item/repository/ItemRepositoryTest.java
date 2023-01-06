@@ -60,6 +60,7 @@ class ItemRepositoryTest {
     void searchItemsTest() {
 
         em.persist(user);
+        item.setOwner(user.getId());
         em.persist(item);
         em.persist(request);
 
@@ -77,6 +78,7 @@ class ItemRepositoryTest {
     void findAllByOwnerTest() {
 
         em.persist(user);
+        item.setOwner(user.getId());
         em.persist(item);
         em.persist(request);
 
@@ -94,6 +96,7 @@ class ItemRepositoryTest {
 
         em.persist(user);
         em.persist(request);
+        item.setOwner(user.getId());
         em.persist(item);
 
         List<Item> items = itemRepository.findAllByRequest(List.of(request));
