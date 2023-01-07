@@ -252,6 +252,7 @@ class BookingRepositoryTest {
     void findAllByItem_OwnerAndStateTest() {
 
         entityManager.persist(user);
+        item.setOwner(user.getId());
         entityManager.persist(item);
         entityManager.persist(booking);
 

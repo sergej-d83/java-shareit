@@ -113,6 +113,7 @@ class ItemRepositoryTest {
 
         em.persist(user);
         em.persist(request);
+        item.setOwner(user.getId());
         em.persist(item);
 
         List<Item> items = itemRepository.findAllByRequest_Id(item.getRequest().getId());

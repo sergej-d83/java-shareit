@@ -37,7 +37,6 @@ class CommentRepositoryTest {
         item.setName("item");
         item.setDescription("test item");
         item.setAvailable(true);
-        item.setOwner(1L);
 
         comment = new Comment();
         comment.setText("cool");
@@ -65,12 +64,13 @@ class CommentRepositoryTest {
     @Test
     void findAllByItem_Owner() {
 
-        item.setOwner(2L);
+
         em.persist(user);
+        item.setOwner(user.getId());
         em.persist(item);
         em.persist(comment);
 
-        List<Comment> comments = commentRepository.findByItemId(item.getOwner());
+        List<Comment> comments = commentRepository.findAllByItem_Owner(item.getOwner());
 
         assertEquals(1, comments.size());
         assertEquals(comment.getText(), comments.get(0).getText());

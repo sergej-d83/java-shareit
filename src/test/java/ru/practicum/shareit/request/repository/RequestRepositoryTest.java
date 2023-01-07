@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
@@ -25,6 +25,7 @@ class RequestRepositoryTest {
     private RequestRepository requestRepository;
 
     private User user;
+    private User requester;
     private ItemRequest itemRequest;
 
     @BeforeEach
@@ -34,9 +35,13 @@ class RequestRepositoryTest {
         user.setName("user");
         user.setEmail("user@user.com");
 
+        requester = new User();
+        requester.setName("requester");
+        requester.setEmail("requester@user.com");
+
         itemRequest = new ItemRequest();
         itemRequest.setDescription("need tool");
-        itemRequest.setRequester(user);
+        itemRequest.setRequester(requester);
         itemRequest.setCreated(LocalDateTime.of(2023, 1, 4, 12, 0, 1));
     }
 
@@ -50,6 +55,7 @@ class RequestRepositoryTest {
     void findAllByRequester_IdTest() {
 
         entityManager.persist(user);
+        entityManager.persist(requester);
         entityManager.persist(itemRequest);
 
         List<ItemRequest> itemRequests = requestRepository.findAllByRequester_Id(itemRequest.getRequester().getId());
@@ -62,9 +68,10 @@ class RequestRepositoryTest {
     void findAllPageableTest() {
 
         entityManager.persist(user);
+        entityManager.persist(requester);
         entityManager.persist(itemRequest);
 
-        List<ItemRequest> itemRequests = requestRepository.findAllPageable(2L, Pageable.unpaged());
+        List<ItemRequest> itemRequests = requestRepository.findAllPageable(user.getId(), PageRequest.of(0, 1));
 
         assertEquals(1, itemRequests.size());
         assertEquals(itemRequest.getDescription(), itemRequests.get(0).getDescription());
