@@ -156,7 +156,7 @@ class BookingRepositoryTest {
 
         List<Booking> targetBooking = bookingRepository
                 .findAllByBooker_IdAndEndIsBeforeOrderByStartDesc(
-                        user.getId(),
+                        user.getId(), item.getId(),
                         LocalDateTime.of(2023, 1, 23, 12, 0, 1));
 
         assertEquals(1, targetBooking.size());

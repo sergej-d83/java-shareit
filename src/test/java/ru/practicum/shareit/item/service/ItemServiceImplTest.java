@@ -296,7 +296,7 @@ class ItemServiceImplTest {
                 .when(itemRepository.findById(item.getId()))
                 .thenReturn(Optional.ofNullable(item));
         Mockito
-                .when(bookingRepository.findAllByBooker_IdAndEndIsBeforeOrderByStartDesc(anyLong(), any(LocalDateTime.class)))
+                .when(bookingRepository.findAllByBooker_IdAndEndIsBeforeOrderByStartDesc(anyLong(), anyLong(), any(LocalDateTime.class)))
                 .thenReturn(List.of(booking));
         Mockito
                 .when(commentRepository.save(any()))

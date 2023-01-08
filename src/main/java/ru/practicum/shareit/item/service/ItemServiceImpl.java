@@ -168,10 +168,7 @@ public class ItemServiceImpl implements ItemService {
                 .orElseThrow(() -> new ItemNotFoundException("Предмет под номером " + itemId + " не найден."));
 
         List<Booking> bookings = bookingRepository
-                .findAllByBooker_IdAndEndIsBeforeOrderByStartDesc(userId, LocalDateTime.now())
-                .stream()
-                .filter(booking -> booking.getItem().getId().equals(itemId))
-                .collect(Collectors.toList());
+                .findAllByBooker_IdAndEndIsBeforeOrderByStartDesc(userId, itemId, LocalDateTime.now());
 
         if (bookings.size() != 0) {
 
