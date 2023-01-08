@@ -34,15 +34,19 @@ public class BookingDto {
     private Status status;
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Item {
-        private final Long id;
+        private Long id;
 
-        private final String name;
+        private String name;
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class User {
 
-        private final Long id;
+        private Long id;
     }
 }

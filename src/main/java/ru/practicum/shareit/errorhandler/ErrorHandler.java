@@ -56,4 +56,10 @@ public class ErrorHandler {
     public ErrorResponse handleItemNotAvailableException(final ItemNotAvailableException e) {
         return new ErrorResponse(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleRequestNotFoundException(final RequestNotFoundException e) {
+        return new ErrorResponse(e.getMessage());
+    }
 }
