@@ -107,7 +107,7 @@ public class ItemServiceImpl implements ItemService {
             throw new UserNotFoundException("Пользователь с номером " + userId + " не найден.");
         }
 
-        List<Item> items = itemRepository.findAllByOwner(userId, PageRequest.of(from, size));
+        List<Item> items = itemRepository.findAllByOwner(userId, PageRequest.of(from, size, Sort.by("id")));
         List<Comment> comments = commentRepository.findAllByItem_Owner(userId);
         List<Booking> bookings = bookingRepository.findAllByItem_OwnerAndState(
                 userId,
