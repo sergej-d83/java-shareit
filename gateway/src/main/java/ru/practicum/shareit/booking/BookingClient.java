@@ -16,9 +16,9 @@ import java.util.Map;
 @Service
 public class BookingClient extends BaseClient {
     private static final String API_PREFIX = "/bookings";
-    private final String STATE = "state";
-    private final String FROM = "from";
-    private final String SIZE = "size";
+    private static final String STATE = "state";
+    private static final String FROM = "from";
+    private static final String SIZE = "size";
 
     @Autowired
     public BookingClient(@Value("${shareit-server.url}") String serverUrl, RestTemplateBuilder builder) {

@@ -17,9 +17,9 @@ import java.util.Map;
 public class ItemClient extends BaseClient {
 
     private static final String API_PREFIX = "/items";
-    private final String TEXT = "text";
-    private final String FROM = "from";
-    private final String SIZE = "size";
+    private static final String TEXT = "text";
+    private static final String FROM = "from";
+    private static final String SIZE = "size";
 
     @Autowired
     public ItemClient(@Value("${shareit-server.url}") String serverUrl, RestTemplateBuilder builder) {
