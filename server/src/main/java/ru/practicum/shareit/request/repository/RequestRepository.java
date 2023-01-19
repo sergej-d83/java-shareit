@@ -11,6 +11,7 @@ public interface RequestRepository extends JpaRepository<ItemRequest, Long> {
 
     List<ItemRequest> findAllByRequester_Id(Long userId);
 
-    @Query("select ir from ItemRequest ir where ir.requester.id <> ?1 order by ir.created desc")
+    @Query(value = "select * from requests ir " +
+            "where ir.requester_id <> ?1 order by ir.created desc", nativeQuery = true)
     List<ItemRequest> findAllPageable(Long userId, Pageable pageable);
 }

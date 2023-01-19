@@ -17,6 +17,9 @@ import java.util.Map;
 public class ItemClient extends BaseClient {
 
     private static final String API_PREFIX = "/items";
+    private final String TEXT = "text";
+    private final String FROM = "from";
+    private final String SIZE = "size";
 
     @Autowired
     public ItemClient(@Value("${shareit-server.url}") String serverUrl, RestTemplateBuilder builder) {
@@ -43,17 +46,17 @@ public class ItemClient extends BaseClient {
 
     public ResponseEntity<Object> getItemsByUserId(Long userId, int from, int size) {
         Map<String, Object> parameters = Map.of(
-                "from", from,
-                "size", size
+                FROM, from,
+                SIZE, size
         );
         return get("?from={from}&size={size}", userId, parameters);
     }
 
     public ResponseEntity<Object> searchItems(String text, int from, int size) {
         Map<String, Object> parameters = Map.of(
-                "text", text,
-                "from", from,
-                "size", size
+                TEXT, text,
+                FROM, from,
+                SIZE, size
         );
         return get("/search?text={text}&from={from}&size={size}", null, parameters);
     }

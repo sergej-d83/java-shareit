@@ -16,6 +16,8 @@ import java.util.Map;
 public class ItemRequestClient extends BaseClient {
 
     private static final String API_PREFIX = "/requests";
+    private final String FROM = "from";
+    private final String SIZE = "size";
 
     @Autowired
     public ItemRequestClient(@Value("${shareit-server.url}") String serverUrl, RestTemplateBuilder builder) {
@@ -37,8 +39,8 @@ public class ItemRequestClient extends BaseClient {
 
     public ResponseEntity<Object> getAllRequests(Long userId, int from, int size) {
         Map<String, Object> parameters = Map.of(
-                "from", from,
-                "size", size
+                FROM, from,
+                SIZE, size
         );
         return get("/all?from={from}&size={size}", userId, parameters);
     }
